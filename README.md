@@ -11,9 +11,9 @@
             - [Motivation](#motivation)
             - [Solution](#solution)
             - [Data](#data)
-        - [Scenario 4](#scenario-4)
 - [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-- [Other](#other)
+- [TODO](#todo)
+    - [things to do before presentation](#things-to-do-before-presentation)
 
 <!-- markdown-toc end -->
 
@@ -60,17 +60,12 @@ Data used for this project comes from
 
 [other text in README...]
 
-### Scenario 4
-2018 was the worst fire season on record as B.C. extends a state of emergency beating the record set only a year earlier in 2017. More than 13,000 square kilometres of the province had burned in 2018, and is estimated to double in damage in 2019.
-Demonstrate how to use technology to educate the issues surrounding
-- local forest fires,
-- floods, and
-- other **natural disasters.**
-
 # Limitations and Future Enhancements
 This application provides a quick overview of water use and a handful of reduction strategies.
 The application can be expanded to explore the impact of other factors such as water use associated with agriculture (ex. meat consumption and the cultivation of agricultural goods such as avocados and almonds).
 
-# Other
-- upload final submission https://gitvan2019.devpost.com
+# TODO
+## things to do before presentation
+- [ ] add link to shiny application
+- [ ] upload final submission https://gitvan2019.devpost.com
   - voting also takes place there
