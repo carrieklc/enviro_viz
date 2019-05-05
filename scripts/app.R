@@ -141,7 +141,7 @@ server <- function(input, output) {
   
   data_viz2 <- reactive({
     data_viz() %>% 
-    mutate(new_total = total_water - sum(full_table()$`water saved(m³/yr)`)) %>% 
+    mutate(new_total = ifelse(selected == 'yes', total_country - (sum(full_table()$`water saved(m³/yr)`)*population), total_water)) %>% 
     filter(country == input$your_country[1])
   })
   
@@ -169,7 +169,7 @@ server <- function(input, output) {
       guides(colour=FALSE) +
       geom_point() +
       scale_size_continuous(range = c(1, 20)) +
-      geom_point(aes(x=country, y = ifelse(new_total < 0, 0, new_total)), data = data_viz2(), color = 'blue') +
+      geom_point(aes(x=country, y = ifelse(new_total < 0, 0, new_total/population), size = ifelse(new_total < 0, 0, new_total)), data = data_viz2(), color = 'blue') +
       geom_hline(yintercept = 50 * 365/1000, lty = 5, color = 'blue') +
       geom_hline(yintercept = 100 * 365/1000, lty = 5, color = 'blue')
 
