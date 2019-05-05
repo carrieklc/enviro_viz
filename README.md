@@ -1,26 +1,32 @@
+# Girls in in Tech, Hacking for Humanity Hackathon - May 2019
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
 - [Girls in in Tech, Hacking for Humanity Hackathon - May 2019](#girls-in-in-tech-hacking-for-humanity-hackathon---may-2019)
+- [Team Group19](#team-group19)
 - [Water Footprint Visualizer](#water-footprint-visualizer)
     - [Challenge Statement: How might we use technology to educate and connect people to the natural world?](#challenge-statement-how-might-we-use-technology-to-educate-and-connect-people-to-the-natural-world)
         - [Scenario 1](#scenario-1)
             - [Motivation](#motivation)
             - [Solution](#solution)
             - [Data](#data)
-        - [Scenario 4](#scenario-4)
 - [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-- [Other](#other)
+- [TODO](#todo)
+    - [things to do before presentation](#things-to-do-before-presentation)
 
 <!-- markdown-toc end -->
-# Girls in in Tech, Hacking for Humanity Hackathon - May 2019
 
-|Team Members|GitHub Handle|
+# Team Group19
+
+|Team Member|GitHub Handle|
 |------------|-------------|
 |Carrie Cheung|[carrieklc](https://github.com/carrieklc)|
 |Socorro Dominguez|[sedv8808](https://github.com/sedv8808)|
 |Klaus Marte|[klausmcm](https://github.com/klausmcm)|
 |Betty Zhou|[bettybhzhou](https://github.com/bettybhzhou)|
+
+
 
 # Water Footprint Visualizer
 
@@ -48,23 +54,18 @@ The application also visualizes the effects of realistic changes an individual c
 Data used for this project comes from
 - [Water Footprint Network](https://waterfootprint.org/en/resources/waterstat/national-water-footprint-statistbics/)
 - [Per capita water use. Water questions and answers; USGS Water Science School](https://water.usgs.gov/edu/qa-home-percapita.html)
-- [https://water.usgs.gov/edu/activity-drip.html](Drip calculator: How much water does a leaking faucet waste? USGS Water Science School)
-- [https://meguiarsonline.com/forums/showthread.php?61294-How-Much-Water-Does-It-Take-To-Wash-Your-Own-Car-At-Home](How Much Water Does It Take To Wash Your Own Car At Home?)
+- [Drip calculator: How much water does a leaking faucet waste? USGS Water Science School](https://water.usgs.gov/edu/activity-drip.html)
+- [How Much Water Does It Take To Wash Your Own Car At Home?](https://meguiarsonline.com/forums/showthread.php?61294-How-Much-Water-Does-It-Take-To-Wash-Your-Own-Car-At-Home)
 
 
 [other text in README...]
-
-### Scenario 4
-2018 was the worst fire season on record as B.C. extends a state of emergency beating the record set only a year earlier in 2017. More than 13,000 square kilometres of the province had burned in 2018, and is estimated to double in damage in 2019.
-Demonstrate how to use technology to educate the issues surrounding
-- local forest fires,
-- floods, and
-- other **natural disasters.**
 
 # Limitations and Future Enhancements
 This application provides a quick overview of water use and a handful of reduction strategies.
 The application can be expanded to explore the impact of other factors such as water use associated with agriculture (ex. meat consumption and the cultivation of agricultural goods such as avocados and almonds).
 
-# Other
-- upload final submission https://gitvan2019.devpost.com
+# TODO
+## things to do before presentation
+- [ ] add link to shiny application
+- [ ] upload final submission https://gitvan2019.devpost.com
   - voting also takes place there
