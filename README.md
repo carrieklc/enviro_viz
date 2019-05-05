@@ -11,6 +11,9 @@
             - [Motivation](#motivation)
             - [Solution](#solution)
             - [Data](#data)
+    - [Implementation](#implementation)
+        - [Stack/API](#stackapi)
+        - [Challenges](#challenges)
 - [Limitations and Future Enhancements](#limitations-and-future-enhancements)
 - [TODO](#todo)
     - [things to do before presentation](#things-to-do-before-presentation)
@@ -60,6 +63,10 @@ Data used for this project comes from
 
 [other text in README...]
 
+## Implementation
+### Stack/API
+### Challenges
+
 # Limitations and Future Enhancements
 This application provides a quick overview of water use and a handful of reduction strategies.
 The application can be expanded to explore the impact of other factors such as water use associated with agriculture (ex. meat consumption and the cultivation of agricultural goods such as avocados and almonds).
@@ -69,3 +76,4 @@ The application can be expanded to explore the impact of other factors such as w
 - [ ] add link to shiny application
 - [ ] upload final submission https://gitvan2019.devpost.com
   - voting also takes place there
+- [ ] describe the stack
