@@ -1,39 +1,5 @@
-# Girls in in Tech, Hacking for Humanity Hackathon - May 2019
-
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-**Table of Contents**
-
-- [Girls in in Tech, Hacking for Humanity Hackathon - May 2019](#girls-in-in-tech-hacking-for-humanity-hackathon---may-2019)
-- [Team Group19](#team-group19)
-- [Water Footprint Visualizer](#water-footprint-visualizer)
-    - [Challenge Statement: How might we use technology to educate and connect people to the natural world?](#challenge-statement-how-might-we-use-technology-to-educate-and-connect-people-to-the-natural-world)
-        - [Scenario 1](#scenario-1)
-            - [Motivation](#motivation)
-            - [Solution](#solution)
-            - [Data](#data)
-- [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-- [TODO](#todo)
-    - [things to do before presentation](#things-to-do-before-presentation)
-
-<!-- markdown-toc end -->
-
-# Team Group19
-
-|Team Member|GitHub Handle|
-|------------|-------------|
-|Carrie Cheung|[carrieklc](https://github.com/carrieklc)|
-|Socorro Dominguez|[sedv8808](https://github.com/sedv8808)|
-|Klaus Marte|[klausmcm](https://github.com/klausmcm)|
-|Betty Zhou|[bettybhzhou](https://github.com/bettybhzhou)|
-
-
-
 # Water Footprint Visualizer
-
-## Challenge Statement: How might we use technology to educate and connect people to the natural world?
-
-### Scenario 1
-Demonstrate how can we use technology to raise awareness and get more mainstream attention to green initiatives?
+GitHub link: https://github.com/carrieklc/enviro_viz
 
 #### Motivation
 _"Water is essential for life. No living being on planet Earth can survive without it. It is a prerequisite for human health and well-being as well as for the preservation of the environment."_ - [United Nations Department of Economic and Social Affairs](https://www.un.org/waterforlifedecade/background.shtml)
@@ -48,7 +14,7 @@ The [Water Footprint Visualizer](https://sedv8808.shinyapps.io/Enviro_viz/) is a
 
 The application also communicates the positiive effect of small changes individuals could make to achieve water savings that could equate to a significant improvement in quality of life in other countries.
 
-This app is built using R and [Shiny](https://shiny.rstudio.com/).
+This app is built in R using [Shiny web framework](https://shiny.rstudio.com/).
 
 #### Data
 
@@ -59,6 +25,11 @@ Data used for this project comes from:
 - [How Much Water Does It Take To Wash Your Own Car At Home?](https://meguiarsonline.com/forums/showthread.php?61294-How-Much-Water-Does-It-Take-To-Wash-Your-Own-Car-At-Home)
 
 ** The main data set driving the application uses data from this source. Specifically, we considered only domestic water usage statistics with blue and grey water usage combined.
+
+#### Challenges
+
+The most difficult part for the team in this project was determining how to communicate our ideas as an effective visual. Although the plot is simple, we spent much time as a team discussing how to visualize the data clearly.
+
 
 #### Next Steps / Future Enhancements
 The application could be extended beyond domestic water use to explore water use associated with agriculture - for example, show the potential water savings associated with meat consumption reduction.
