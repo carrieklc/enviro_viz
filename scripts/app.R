@@ -141,7 +141,7 @@ server <- function(input, output) {
   
   data_viz2 <- reactive({
     data_viz() %>% 
-    mutate(new_total = ifelse(selected == 'yes', total_country - (sum(full_table()$`water saved(m³/yr)`)*population), total_water)) %>% 
+    mutate(new_total = ifelse(selected == 'yes', total_country - (sum(full_table()$`water saved(m³/yr)`)*population), total_country)) %>% 
     filter(country == input$your_country[1])
   })
   
