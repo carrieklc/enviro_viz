@@ -48,6 +48,7 @@ Demonstrate with technology how ‘Planet’ could become a core marketing compo
 
 # motivation
 - water is essential for **life** - _Moisture is the essence of wetness, and wetness is the essence of beauty._ - Derek Zoolander
+- water is a finite resource - supply remains constant but global population is increasing
 
 # other
 - upload final submission https://gitvan2019.devpost.com
