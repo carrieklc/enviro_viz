@@ -10,15 +10,17 @@ library(tidyverse)
 library(shinyWidgets)
 library(DT)
 library(forcats)
+library(shinythemes)
 
 # Reads data from cleaned file
-data <- data <- read_csv("../data/cleaned_water_data.csv") %>%
+data <- read_csv("../data/cleaned_water_data.csv") %>%
   mutate(total_water = blue + grey, 
          total_country = population * total_water, 
          selected = "no")
 
 # load water use conversion table
-water_use <- read_csv("../data/water_use.csv")
+water_use <- read_csv("../data/water_use.csv") %>%
+    select(-reference)
 
 # Names the countries in dataset
 country_origin <- sort(unique(data$country))
@@ -27,6 +29,8 @@ country_comparison <- sort(unique(data$country))
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+
+  theme = shinytheme("cerulean"),
   
   # Application title
   titlePanel("Water Footprint Visualizer"),
