@@ -11,12 +11,7 @@
             - [Motivation](#motivation)
             - [Solution](#solution)
             - [Data](#data)
-    - [Implementation](#implementation)
-        - [Stack/API](#stackapi)
-        - [Challenges](#challenges)
-- [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-- [TODO](#todo)
-    - [things to do before presentation](#things-to-do-before-presentation)
+            - [Next Steps / Future Enhancements](#next-steps--future-enhancements)
 
 <!-- markdown-toc end -->
 
@@ -64,4 +59,4 @@ Data used for this project comes from:
 ** The main data set driving the application uses data from this source. Specifically, we considered only domestic water usage statistics with blue and grey water usage combined.
 
 #### Next Steps / Future Enhancements
-The application could be extended beyond domestic water use to explore water use associated with agriculture - for example, show the potential water savings associated with meat consumption reduction.
+The application could be extended beyond domestic water use to explore water use associated with agriculture - for example, show the effects on water use associated with meat consumption and the cultivation of [avocados](https://www.theguardian.com/commentisfree/2016/aug/12/hispters-handle-unpalatable-truth-avocado-toast) and [almonds](https://www.theguardian.com/business/2014/sep/14/alarm-almond-farmers-drain-california-dry).
