@@ -47,13 +47,13 @@ ui <- fluidPage(
                              selected = "Albania"),
                  p("Time to take action!", style='font-size:130%'),
                  sliderInput("flushInput", "Reduce toilet flushes a day by?", 
-                             min = 0, max = 30, value = 30, post =" flushes", ticks = FALSE),
+                             min = 0, max = 10, value = 0, post =" flushes", ticks = FALSE),
                  sliderInput("showerInput", "Shortens daily showers by how many mins?",
-                             min = 0, max = 30, value = 30, post =" mins", ticks = FALSE),
-                 sliderInput("carInput",  "How about car washes per year?",
-                             min = 0, max = 30, value = 30, post =" washes", ticks = FALSE),
+                             min = 0, max = 30, value = 0, post =" mins", ticks = FALSE),
+                 sliderInput("carInput",  "How many car washes per year?",
+                             min = 0, max = 10, value = 0, post =" washes", ticks = FALSE),
                  sliderInput("laundryInput", "Reduce laundry loads a week by?",
-                             min = 0, max = 30, value = 30, post =" loads", ticks = FALSE)
+                             min = 0, max = 7, value = 0, post =" loads", ticks = FALSE)
                  
     ),
     
@@ -99,41 +99,51 @@ server <- function(input, output) {
   
   # 
   flush <- reactive({
-    water_use %>% 
+    water_use %>%
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
     filter(activity == 'toilet flush (newer toilets)') %>% 
     mutate(activity = ifelse(activity == 'toilet flush (newer toilets)', 'toilet flush', activity)) %>% 
-    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
-           `water saved(m^3)` = round(365 * input$flushInput[1] * `water consumption (m^3)`, 3))
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(365 * input$flushInput[1] * `water consumption (m³)`, 3))
   })
   
   shower <- reactive({
     water_use %>% 
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
     filter(activity == 'shower (20 minutes)') %>% 
     mutate(activity = ifelse(activity == 'shower (20 minutes)', 'shower', activity)) %>% 
-    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
-           `water saved(m^3)` = round(365 * input$showerInput[1] * `water consumption (m^3)`/20, 3))
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(365 * input$showerInput[1] * `water consumption (m³)`/20, 3))
   })
   
   car <- reactive({
     water_use %>% 
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
     filter(activity == 'car wash (by hand - very rough estimate)') %>%
     mutate(activity = ifelse(activity == 'car wash (by hand - very rough estimate)', 'car wash', activity)) %>% 
-    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
-           `water saved(m^3)` = round(input$carInput[1] * `water consumption (m^3)`, 3))
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(input$carInput[1] * `water consumption (m³)`, 3))
   })
   
   laundry <- reactive({
-    water_use %>% 
+    water_use %>%
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
     filter(activity == 'laundry (1 wash)') %>%
     mutate(activity = ifelse(activity == 'laundry (1 wash)', 'laundry', activity)) %>% 
-    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
-           `water saved(m^3)` = round(52 * input$laundryInput[1] * `water consumption (m^3)`, 3))
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(52 * input$laundryInput[1] * `water consumption (m³)`, 3))
   })
   
   full_table <- reactive({
     rbind(flush(), shower(), car(), laundry()) %>% 
-      select(-`water consumption (m^3)`)
+      select(-`water consumption (m³)`)
     })
+  
+  data_viz2 <- reactive({
+    data_viz() %>% 
+    mutate(new_total = total_water - sum(full_table()$`water saved(m³/yr)`)) %>% 
+    filter(country == input$your_country[1])
+  })
   
   # Render plots
   output$distPlot <- renderPlot({
@@ -155,7 +165,10 @@ server <- function(input, output) {
             legend.position="none",
             plot.title = element_text(hjust = 0.5)) +
       guides(colour=FALSE) +
-      geom_point()
+      geom_point() +
+      geom_point(aes(x=country, y = ifelse(new_total < 0, 0, new_total)), data = data_viz2(), color = 'blue') +
+      geom_hline(yintercept = 50 * 365/1000, lty = 5, color = 'blue') +
+      geom_hline(yintercept = 100 * 365/1000, lty = 5, color = 'blue')
 
   })
   
