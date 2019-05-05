@@ -145,11 +145,13 @@ server <- function(input, output) {
     filter(country == input$your_country[1])
   })
   
+ # select_ctry <- reactive ({input$your_country[1]})
+  
   # Render plots
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
-    cap_text <- paste("Size of dots represents total water use for the country.\nThe average person in", select_ctry, "uses",
-                      round(select$total_water, 0), "m³ of water per year domestically.")
+    cap_text <- paste("Size of dots represents total water use for the country.\nThe average person in", data_viz2()$country, "uses",
+                      round(data_viz2()$total_water, 0), "m³ of water per year domestically.")
     
     data_viz() %>% 
       ggplot(aes(x=fct_reorder(country, total_water), y = total_water, size = total_country, colour = selected)) +
