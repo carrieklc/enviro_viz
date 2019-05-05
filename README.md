@@ -52,8 +52,8 @@ The application also visualizes the effects of realistic changes an individual c
 Data used for this project comes from
 - [Water Footprint Network](https://waterfootprint.org/en/resources/waterstat/national-water-footprint-statistbics/)
 - [Per capita water use. Water questions and answers; USGS Water Science School](https://water.usgs.gov/edu/qa-home-percapita.html)
-- [https://water.usgs.gov/edu/activity-drip.html](Drip calculator: How much water does a leaking faucet waste? USGS Water Science School)
-- [https://meguiarsonline.com/forums/showthread.php?61294-How-Much-Water-Does-It-Take-To-Wash-Your-Own-Car-At-Home](How Much Water Does It Take To Wash Your Own Car At Home?)
+- [Drip calculator: How much water does a leaking faucet waste? USGS Water Science School](https://water.usgs.gov/edu/activity-drip.html)
+- [How Much Water Does It Take To Wash Your Own Car At Home?](https://meguiarsonline.com/forums/showthread.php?61294-How-Much-Water-Does-It-Take-To-Wash-Your-Own-Car-At-Home)
 
 
 [other text in README...]
