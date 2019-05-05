@@ -51,7 +51,7 @@ This app is built using R and [Shiny](https://shiny.rstudio.com/).
 #### Data
 
 Data used for this project comes from:
-- [Water Footprint Network](https://waterfootprint.org/en/resources/waterstat/national-water-footprint-statistbics/)**
+- [Water Footprint Network](https://waterfootprint.org/en/resources/waterstat/national-water-footprint-statistics/)**
 - [Per capita water use. Water questions and answers; USGS Water Science School](https://water.usgs.gov/edu/qa-home-percapita.html)
 - [Drip calculator: How much water does a leaking faucet waste? USGS Water Science School](https://water.usgs.gov/edu/activity-drip.html)
 - [How Much Water Does It Take To Wash Your Own Car At Home?](https://meguiarsonline.com/forums/showthread.php?61294-How-Much-Water-Does-It-Take-To-Wash-Your-Own-Car-At-Home)
