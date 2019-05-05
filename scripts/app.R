@@ -17,6 +17,9 @@ data <- data <- read_csv("../data/cleaned_water_data.csv") %>%
          total_country = population * total_water, 
          selected = "no")
 
+# load water use conversion table
+water_use <- read_csv("../data/water_use.csv")
+
 # Names the countries in dataset
 country_origin <- sort(unique(data$country))
 
@@ -41,13 +44,23 @@ ui <- fluidPage(
                              label = "Select comparison country", 
                              choices = country_origin, #Select the country of interest. 
                              options = list(`actions-box` = TRUE), 
-                             selected = "Albania")
+                             selected = "Albania"),
+                 p("Time to take action!", style='font-size:130%'),
+                 sliderInput("flushInput", "Reduce toilet flushes a day by?", 
+                             min = 0, max = 30, value = 30, post =" flushes", ticks = FALSE),
+                 sliderInput("showerInput", "Shortens daily showers by how many mins?",
+                             min = 0, max = 30, value = 30, post =" mins", ticks = FALSE),
+                 sliderInput("carInput",  "How about car washes per year?",
+                             min = 0, max = 30, value = 30, post =" washes", ticks = FALSE),
+                 sliderInput("laundryInput", "Reduce laundry loads a week by?",
+                             min = 0, max = 30, value = 30, post =" loads", ticks = FALSE)
                  
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("distPlot"),
+      dataTableOutput("table")
     )
   )
 )
@@ -84,6 +97,44 @@ server <- function(input, output) {
   # Define palette
   cols <- c("no" = "black", "yes" = "red")
   
+  # 
+  flush <- reactive({
+    water_use %>% 
+    filter(activity == 'toilet flush (newer toilets)') %>% 
+    mutate(activity = ifelse(activity == 'toilet flush (newer toilets)', 'toilet flush', activity)) %>% 
+    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
+           `water saved(m^3)` = round(365 * input$flushInput[1] * `water consumption (m^3)`, 3))
+  })
+  
+  shower <- reactive({
+    water_use %>% 
+    filter(activity == 'shower (20 minutes)') %>% 
+    mutate(activity = ifelse(activity == 'shower (20 minutes)', 'shower', activity)) %>% 
+    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
+           `water saved(m^3)` = round(365 * input$showerInput[1] * `water consumption (m^3)`/20, 3))
+  })
+  
+  car <- reactive({
+    water_use %>% 
+    filter(activity == 'car wash (by hand - very rough estimate)') %>%
+    mutate(activity = ifelse(activity == 'car wash (by hand - very rough estimate)', 'car wash', activity)) %>% 
+    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
+           `water saved(m^3)` = round(input$carInput[1] * `water consumption (m^3)`, 3))
+  })
+  
+  laundry <- reactive({
+    water_use %>% 
+    filter(activity == 'laundry (1 wash)') %>%
+    mutate(activity = ifelse(activity == 'laundry (1 wash)', 'laundry', activity)) %>% 
+    mutate(`water consumption (m^3)` = round(`water consumption (m^3)`, 3),
+           `water saved(m^3)` = round(52 * input$laundryInput[1] * `water consumption (m^3)`, 3))
+  })
+  
+  full_table <- reactive({
+    rbind(flush(), shower(), car(), laundry()) %>% 
+      select(-`water consumption (m^3)`)
+    })
+  
   # Render plots
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
@@ -98,6 +149,11 @@ server <- function(input, output) {
       scale_colour_manual(values = cols) + 
       geom_point()
 
+  })
+  
+  # Render Table
+  output$table <- renderDataTable({
+    datatable(full_table())
   })
 }
 
