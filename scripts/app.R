@@ -29,7 +29,7 @@ country_comparison <- sort(unique(data$country))
 ui <- fluidPage(
   
   # Application title
-  titlePanel("Water Consumption Per Capita"),
+  titlePanel("Water Footprint Visualizer"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -163,11 +163,12 @@ server <- function(input, output) {
       ggtitle("Water Footprint by Country") +
       guides(fill=guide_legend(title="Total National Water Use")) +
       scale_colour_manual(values = cols) + 
-      theme(plot.caption = element_text(hjust = 0), 
+      theme(plot.caption = element_text(hjust = 0, size=12), 
             legend.position="none",
             plot.title = element_text(hjust = 0.5)) +
       guides(colour=FALSE) +
       geom_point() +
+      scale_size_continuous(range = c(1, 20)) +
       geom_point(aes(x=country, y = ifelse(new_total < 0, 0, new_total)), data = data_viz2(), color = 'blue') +
       geom_hline(yintercept = 50 * 365/1000, lty = 5, color = 'blue') +
       geom_hline(yintercept = 100 * 365/1000, lty = 5, color = 'blue')
