@@ -17,6 +17,9 @@ data <- data <- read_csv("../data/cleaned_water_data.csv") %>%
          total_country = population * total_water, 
          selected = "no")
 
+# load water use conversion table
+water_use <- read_csv("../data/water_use.csv")
+
 # Names the countries in dataset
 country_origin <- sort(unique(data$country))
 
@@ -26,7 +29,7 @@ country_comparison <- sort(unique(data$country))
 ui <- fluidPage(
   
   # Application title
-  titlePanel("Water Consumption Per Capita"),
+  titlePanel("Water Footprint Visualizer"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -41,13 +44,23 @@ ui <- fluidPage(
                              label = "Select comparison country", 
                              choices = country_origin, #Select the country of interest. 
                              options = list(`actions-box` = TRUE), 
-                             selected = "Albania")
+                             selected = "Albania"),
+                 p("Time to take action!", style='font-size:130%'),
+                 sliderInput("flushInput", "Reduce toilet flushes a day by?", 
+                             min = 0, max = 10, value = 0, post =" flushes", ticks = FALSE),
+                 sliderInput("showerInput", "Shortens daily showers by how many mins?",
+                             min = 0, max = 30, value = 0, post =" mins", ticks = FALSE),
+                 sliderInput("carInput",  "How many car washes per year?",
+                             min = 0, max = 10, value = 0, post =" washes", ticks = FALSE),
+                 sliderInput("laundryInput", "Reduce laundry loads a week by?",
+                             min = 0, max = 7, value = 0, post =" loads", ticks = FALSE)
                  
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("distPlot"),
+      dataTableOutput("table")
     )
   )
 )
@@ -84,20 +97,87 @@ server <- function(input, output) {
   # Define palette
   cols <- c("no" = "black", "yes" = "red")
   
+  # 
+  flush <- reactive({
+    water_use %>%
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
+    filter(activity == 'toilet flush (newer toilets)') %>% 
+    mutate(activity = ifelse(activity == 'toilet flush (newer toilets)', 'toilet flush', activity)) %>% 
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(365 * input$flushInput[1] * `water consumption (m³)`, 3))
+  })
+  
+  shower <- reactive({
+    water_use %>% 
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
+    filter(activity == 'shower (20 minutes)') %>% 
+    mutate(activity = ifelse(activity == 'shower (20 minutes)', 'shower', activity)) %>% 
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(365 * input$showerInput[1] * `water consumption (m³)`/20, 3))
+  })
+  
+  car <- reactive({
+    water_use %>% 
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
+    filter(activity == 'car wash (by hand - very rough estimate)') %>%
+    mutate(activity = ifelse(activity == 'car wash (by hand - very rough estimate)', 'car wash', activity)) %>% 
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(input$carInput[1] * `water consumption (m³)`, 3))
+  })
+  
+  laundry <- reactive({
+    water_use %>%
+    rename(`water consumption (m³)` = `water consumption (m^3)`) %>% 
+    filter(activity == 'laundry (1 wash)') %>%
+    mutate(activity = ifelse(activity == 'laundry (1 wash)', 'laundry', activity)) %>% 
+    mutate(`water consumption (m³)` = round(`water consumption (m³)`, 3),
+           `water saved(m³/yr)` = round(52 * input$laundryInput[1] * `water consumption (m³)`, 3))
+  })
+  
+  full_table <- reactive({
+    rbind(flush(), shower(), car(), laundry()) %>% 
+      select(-`water consumption (m³)`)
+    })
+  
+  data_viz2 <- reactive({
+    data_viz() %>% 
+    mutate(new_total = total_water - sum(full_table()$`water saved(m³/yr)`)) %>% 
+    filter(country == input$your_country[1])
+  })
+  
+ # select_ctry <- reactive ({input$your_country[1]})
+  
   # Render plots
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
+    cap_text <- paste("Size of dots represents total water use for the country.\nThe average person in", data_viz2()$country, "uses",
+                      round(data_viz2()$total_water, 0), "m³ of water per year domestically.")
     
     data_viz() %>% 
       ggplot(aes(x=fct_reorder(country, total_water), y = total_water, size = total_country, colour = selected)) +
       theme_bw() + 
-      xlab("Country") +
-      ylab("Water Use Per Person (m^3/yr)") + 
+      labs(x="Country", 
+           y="Water Use Per Person (m³/yr)", 
+           caption = cap_text, 
+           size='Total National Water Use (m³/yr)') +
       ggtitle("Water Footprint by Country") +
       guides(fill=guide_legend(title="Total National Water Use")) +
       scale_colour_manual(values = cols) + 
-      geom_point()
+      theme(plot.caption = element_text(hjust = 0, size=12), 
+            legend.position="none",
+            plot.title = element_text(hjust = 0.5)) +
+      guides(colour=FALSE) +
+      geom_point() +
+      scale_size_continuous(range = c(1, 20)) +
+      geom_point(aes(x=country, y = ifelse(new_total < 0, 0, new_total)), data = data_viz2(), color = 'blue') +
+      geom_hline(yintercept = 50 * 365/1000, lty = 5, color = 'blue') +
+      geom_hline(yintercept = 100 * 365/1000, lty = 5, color = 'blue')
 
+  })
+  
+  # Render Table
+  output$table <- renderDataTable({
+    datatable(full_table())
   })
 }
 
