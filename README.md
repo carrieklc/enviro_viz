@@ -19,7 +19,7 @@
 
 # Team Group19
 
-|Team Members|GitHub Handle|
+|Team Member|GitHub Handle|
 |------------|-------------|
 |Carrie Cheung|[carrieklc](https://github.com/carrieklc)|
 |Socorro Dominguez|[sedv8808](https://github.com/sedv8808)|
