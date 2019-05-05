@@ -42,7 +42,8 @@ The current marketing mix model are the 7P’s:
 - Promotion, 
 - People, 
 - Process and 
-- Physical.  
+- Physical.
+
 Demonstrate with technology how ‘Planet’ could become a core marketing component.
 
 # motivation
