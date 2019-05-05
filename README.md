@@ -4,6 +4,7 @@
 **Table of Contents**
 
 - [Girls in in Tech, Hacking for Humanity Hackathon - May 2019](#girls-in-in-tech-hacking-for-humanity-hackathon---may-2019)
+- [Team Group19](#team-group19)
 - [Water Footprint Visualizer](#water-footprint-visualizer)
     - [Challenge Statement: How might we use technology to educate and connect people to the natural world?](#challenge-statement-how-might-we-use-technology-to-educate-and-connect-people-to-the-natural-world)
         - [Scenario 1](#scenario-1)
@@ -16,6 +17,7 @@
 
 <!-- markdown-toc end -->
 
+# Team Group19
 
 |Team Members|GitHub Handle|
 |------------|-------------|
