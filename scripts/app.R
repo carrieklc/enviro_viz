@@ -138,15 +138,23 @@ server <- function(input, output) {
   # Render plots
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
+    cap_text <- paste("Size of dots represents total water use for the country.\nThe average person in", select_ctry, "uses",
+                      round(select$total_water, 0), "m³ of water per year domestically.")
     
     data_viz() %>% 
       ggplot(aes(x=fct_reorder(country, total_water), y = total_water, size = total_country, colour = selected)) +
       theme_bw() + 
-      xlab("Country") +
-      ylab("Water Use Per Person (m^3/yr)") + 
+      labs(x="Country", 
+           y="Water Use Per Person (m³/yr)", 
+           caption = cap_text, 
+           size='Total National Water Use (m³/yr)') +
       ggtitle("Water Footprint by Country") +
       guides(fill=guide_legend(title="Total National Water Use")) +
       scale_colour_manual(values = cols) + 
+      theme(plot.caption = element_text(hjust = 0), 
+            legend.position="none",
+            plot.title = element_text(hjust = 0.5)) +
+      guides(colour=FALSE) +
       geom_point()
 
   })
