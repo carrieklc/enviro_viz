@@ -31,6 +31,7 @@ country_comparison <- sort(unique(data$country))
 ui <- fluidPage(
 
   theme = shinytheme("cerulean"),
+  # theme = "./www/bootstrap.css",
   
   # Application title
   titlePanel("Water Footprint Visualizer"),
@@ -181,7 +182,10 @@ server <- function(input, output) {
   
   # Render Table
   output$table <- renderDataTable({
-    datatable(full_table())
+      datatable(
+          full_table(),
+          options=list(dom="t")
+      )
   })
 }
 
