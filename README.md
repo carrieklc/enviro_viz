@@ -1,3 +1,17 @@
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+**Table of Contents**
+
+- [enviro_viz](#enviroviz)
+- [challenge statement](#challenge-statement)
+    - [scenario 1](#scenario-1)
+    - [~~scenario 2~~](#scenario-2)
+    - [~~scenario 3~~](#scenario-3)
+    - [scenario 4](#scenario-4)
+    - [~~scenario 5~~](#scenario-5)
+- [motivation](#motivation)
+- [other](#other)
+
+<!-- markdown-toc end -->
 # enviro_viz
 Environmental impact visualizer for Girls in in Tech event, Hacking for Humanity 2019
 
