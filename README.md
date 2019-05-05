@@ -1,3 +1,5 @@
+# Girls in in Tech, Hacking for Humanity Hackathon - May 2019
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
@@ -13,7 +15,7 @@
 - [Other](#other)
 
 <!-- markdown-toc end -->
-# Girls in in Tech, Hacking for Humanity Hackathon - May 2019
+
 
 |Team Members|GitHub Handle|
 |------------|-------------|
@@ -21,6 +23,8 @@
 |Socorro Dominguez|[sedv8808](https://github.com/sedv8808)|
 |Klaus Marte|[klausmcm](https://github.com/klausmcm)|
 |Betty Zhou|[bettybhzhou](https://github.com/bettybhzhou)|
+
+
 
 # Water Footprint Visualizer
 
